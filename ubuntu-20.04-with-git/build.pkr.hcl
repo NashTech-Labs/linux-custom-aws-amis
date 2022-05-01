@@ -1,7 +1,20 @@
+# Variables
+variable "ami_name" {
+  type    = string
+  default = "ubuntu-focal-20.04-amd64-with-git"
+}
+
+variable "region" {
+  type = string
+  description = "Region in which the image should be created"
+  default = "us-east-1"
+}
+
+
 source "amazon-ebs" "ubuntu" {
-  ami_name      = "ubuntu-focal-20.04-amd64-with-git"
+  ami_name      = var.ami_name
   instance_type = "t2.micro"
-  region        = "us-east-1"
+  region        = var.region
   source_ami_filter {
     filters = {
       name                = "ubuntu/images/*ubuntu-focal-20.04-amd64-server-*"
